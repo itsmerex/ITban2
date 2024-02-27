@@ -1,6 +1,11 @@
 const faker = require("faker");
 const mysql = require("mysql");
 
+customerCount = 500;
+productCount = 2500;
+orderCount = 1500;
+orderDetailCount = 1500;
+
 // Create a MySQL connection
 const connection = mysql.createConnection({
   host: "localhost",
@@ -10,7 +15,7 @@ const connection = mysql.createConnection({
 });
 
 // Generate 500 customer
-for (let i = 0; i < 500; i++) {
+for (let i = 0; i < customerCount; i++) {
   const firstName = faker.name.firstName();
   const middleName = faker.name.middleName();
   const lastName = faker.name.lastName();
@@ -34,7 +39,7 @@ for (let i = 0; i < 500; i++) {
 }
 
 //Generate 2500 products
-for (let i = 0; i < 2500; i++) {
+for (let i = 0; i < productCount; i++) {
   const name = faker.commerce.productName();
   const description = faker.commerce.productDescription();
   const attributes = {
@@ -56,8 +61,8 @@ for (let i = 0; i < 2500; i++) {
 }
 
 //Generate 1500 orders
-for (let i = 0; i < 1500; i++) {
-  const customerId = faker.random.number({ min: 1, max: 500 });
+for (let i = 0; i < orderCount; i++) {
+  const customerId = faker.random.number({ min: 1, max: customerCount });
   const orderDate = faker.date.recent();
 
   const sql = `INSERT INTO orders (customer_id, order_date) VALUES (?, ?)`;
@@ -69,9 +74,9 @@ for (let i = 0; i < 1500; i++) {
 }
 
 //Generate 1500 order details
-for (let i = 0; i < 1500; i++) {
-  const orderId = faker.random.number({ min: 1, max: 1500 });
-  const productId = faker.random.number({ min: 1, max: 2500 });
+for (let i = 0; i < orderDetailCount; i++) {
+  const orderId = faker.random.number({ min: 1, max: orderCount });
+  const productId = faker.random.number({ min: 1, max: productCount });
   const quantity = faker.random.number({ min: 1, max: 100 });
   const price = faker.commerce.price();
 
