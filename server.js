@@ -14,7 +14,20 @@ const connection = mysql.createConnection({
   database: "e_commerce",
 });
 
-// Generate 500 customer
+// Define a function to generate random size
+function generateRandomSize() {
+  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+  return sizes[Math.floor(Math.random() * sizes.length)];
+}
+
+// Define a function to generate random brand
+function generateRandomBrand() {
+  const brands = ['Nike', 'Adidas', 'Puma', 'Reebok', 'Under Armour'];
+  return brands[Math.floor(Math.random() * brands.length)];
+}
+
+
+// Generate 500 customers
 for (let i = 0; i < customerCount; i++) {
   const firstName = faker.name.firstName();
   const middleName = faker.name.middleName();
@@ -38,14 +51,16 @@ for (let i = 0; i < customerCount; i++) {
   );
 }
 
-//Generate 2500 products
+// Generate 2500 products
 for (let i = 0; i < productCount; i++) {
   const name = faker.commerce.productName();
   const description = faker.commerce.productDescription();
   const attributes = {
     material: faker.commerce.productMaterial(),
     color: faker.commerce.color(),
+    size: generateRandomSize(),
     price: faker.commerce.price(),
+    brand: generateRandomBrand(),
   };
 
   const sql = `INSERT INTO products (name, description, attributes) VALUES (?, ?, ?)`;
@@ -60,7 +75,7 @@ for (let i = 0; i < productCount; i++) {
   );
 }
 
-//Generate 1500 orders
+// Generate 1500 orders
 for (let i = 0; i < orderCount; i++) {
   const customerId = faker.random.number({ min: 1, max: customerCount });
   const orderDate = faker.date.recent();
@@ -73,7 +88,7 @@ for (let i = 0; i < orderCount; i++) {
   });
 }
 
-//Generate 1500 order details
+// Generate 1500 order details
 for (let i = 0; i < orderDetailCount; i++) {
   const orderId = faker.random.number({ min: 1, max: orderCount });
   const productId = faker.random.number({ min: 1, max: productCount });
