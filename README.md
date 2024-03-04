@@ -1,8 +1,8 @@
-By R. Ponce. & A. Salida.
+## By R. Ponce. & A. Salida.
 
-1. Retrieve Product Information:
+### 1. Retrieve Product Information:
 
-   Write a query to fetch the names and descriptions of all products.
+* Write a query to fetch the names and descriptions of all products.
 
 ```sql
 SELECT name, description
