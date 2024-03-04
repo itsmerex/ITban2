@@ -4,6 +4,7 @@ By R. Ponce. & A. Salida.
 
    Write a query to fetch the names and descriptions of all products.
 
-A u
+```sql
 SELECT name, description
 FROM products
+```
